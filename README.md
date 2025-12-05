@@ -11,7 +11,7 @@
 local G2L = {};
 
 -- StarterGui.ScreenGui
-G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["1"] = Instance.new("ScreenGui", game:GetService("CoreGui"):WaitForChild("af21f37e484439e3ba6f6ef33f54be0186fb6c713fad82bed075489009bd6854"));
 G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
 
@@ -25,191 +25,191 @@ G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Name"] = [[Main]];
 
 
+-- StarterGui.ScreenGui.Main.LocalScript
+G2L["3"] = Instance.new("LocalScript", G2L["2"]);
+
+
+
+-- StarterGui.ScreenGui.Main.UIDrag
+G2L["4"] = Instance.new("LocalScript", G2L["2"]);
+G2L["4"]["Name"] = [[UIDrag]];
+
+
+-- StarterGui.ScreenGui.Main.LocalScript
+G2L["5"] = Instance.new("LocalScript", G2L["2"]);
+
+
+
 -- StarterGui.ScreenGui.Main.bg
-G2L["3"] = Instance.new("ImageLabel", G2L["2"]);
-G2L["3"]["BorderSizePixel"] = 0;
-G2L["3"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["3"]["ImageTransparency"] = 0.4;
+G2L["6"] = Instance.new("ImageLabel", G2L["2"]);
+G2L["6"]["BorderSizePixel"] = 0;
+G2L["6"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["6"]["ImageTransparency"] = 0.4;
 -- [ERROR] cannot convert ImageContent, please report to "https://github.com/uniquadev/GuiToLuaConverter/issues"
-G2L["3"]["ImageColor3"] = Color3.fromRGB(129, 0, 255);
-G2L["3"]["Image"] = [[rbxassetid://992001116]];
-G2L["3"]["Size"] = UDim2.new(0, 471, 0, 312);
-G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3"]["BackgroundTransparency"] = 1;
-G2L["3"]["Name"] = [[bg]];
+G2L["6"]["ImageColor3"] = Color3.fromRGB(129, 0, 255);
+G2L["6"]["Image"] = [[rbxassetid://992001116]];
+G2L["6"]["Size"] = UDim2.new(0, 471, 0, 312);
+G2L["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["6"]["BackgroundTransparency"] = 1;
+G2L["6"]["Name"] = [[bg]];
 
 
 -- StarterGui.ScreenGui.Main.CodeBar
-G2L["4"] = Instance.new("TextBox", G2L["2"]);
-G2L["4"]["Name"] = [[CodeBar]];
-G2L["4"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["4"]["BorderSizePixel"] = 0;
-G2L["4"]["TextWrapped"] = true;
-G2L["4"]["TextSize"] = 17;
-G2L["4"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["4"]["TextYAlignment"] = Enum.TextYAlignment.Top;
-G2L["4"]["BackgroundColor3"] = Color3.fromRGB(3, 3, 3);
-G2L["4"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["4"]["MultiLine"] = true;
-G2L["4"]["ClearTextOnFocus"] = false;
-G2L["4"]["PlaceholderText"] = [[print(" Moon Backdoor")]];
-G2L["4"]["Size"] = UDim2.new(0, 431, 0, 202);
-G2L["4"]["Position"] = UDim2.new(0.04237, 0, 0.14423, 0);
-G2L["4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["4"]["Text"] = [[]];
+G2L["7"] = Instance.new("TextBox", G2L["2"]);
+G2L["7"]["Name"] = [[CodeBar]];
+G2L["7"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["7"]["BorderSizePixel"] = 0;
+G2L["7"]["TextWrapped"] = true;
+G2L["7"]["TextSize"] = 17;
+G2L["7"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["7"]["TextYAlignment"] = Enum.TextYAlignment.Top;
+G2L["7"]["BackgroundColor3"] = Color3.fromRGB(3, 3, 3);
+G2L["7"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["7"]["MultiLine"] = true;
+G2L["7"]["ClearTextOnFocus"] = false;
+G2L["7"]["PlaceholderText"] = [[print(" Moon Backdoor")]];
+G2L["7"]["Size"] = UDim2.new(0, 431, 0, 202);
+G2L["7"]["Position"] = UDim2.new(0.04237, 0, 0.14423, 0);
+G2L["7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["7"]["Text"] = [[]];
 
 
 -- StarterGui.ScreenGui.Main.Buttons
-G2L["5"] = Instance.new("Frame", G2L["2"]);
-G2L["5"]["BorderSizePixel"] = 0;
-G2L["5"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["5"]["Size"] = UDim2.new(0, 431, 0, 41);
-G2L["5"]["Position"] = UDim2.new(0.04237, 0, 0.82051, 0);
-G2L["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["5"]["Name"] = [[Buttons]];
-G2L["5"]["BackgroundTransparency"] = 1;
+G2L["8"] = Instance.new("Frame", G2L["2"]);
+G2L["8"]["BorderSizePixel"] = 0;
+G2L["8"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["8"]["Size"] = UDim2.new(0, 431, 0, 41);
+G2L["8"]["Position"] = UDim2.new(0.04237, 0, 0.82051, 0);
+G2L["8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["8"]["Name"] = [[Buttons]];
+G2L["8"]["BackgroundTransparency"] = 1;
 
 
 -- StarterGui.ScreenGui.Main.Buttons.UIListLayout
-G2L["6"] = Instance.new("UIListLayout", G2L["5"]);
-G2L["6"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-G2L["6"]["Padding"] = UDim.new(0, 19);
-G2L["6"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
-G2L["6"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-G2L["6"]["FillDirection"] = Enum.FillDirection.Horizontal;
+G2L["9"] = Instance.new("UIListLayout", G2L["8"]);
+G2L["9"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+G2L["9"]["Padding"] = UDim.new(0, 19);
+G2L["9"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
+G2L["9"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+G2L["9"]["FillDirection"] = Enum.FillDirection.Horizontal;
 
 
 -- StarterGui.ScreenGui.Main.Buttons.Exe
-G2L["7"] = Instance.new("TextButton", G2L["5"]);
-G2L["7"]["BorderSizePixel"] = 0;
-G2L["7"]["TextSize"] = 29;
-G2L["7"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["7"]["BackgroundColor3"] = Color3.fromRGB(69, 3, 113);
-G2L["7"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["7"]["Size"] = UDim2.new(0, 205, 0, 38);
-G2L["7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["7"]["Text"] = [[Execute]];
-G2L["7"]["Name"] = [[Exe]];
-G2L["7"]["Position"] = UDim2.new(0.2181, 0, -0.0122, 0);
+G2L["a"] = Instance.new("TextButton", G2L["8"]);
+G2L["a"]["BorderSizePixel"] = 0;
+G2L["a"]["TextSize"] = 29;
+G2L["a"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["a"]["BackgroundColor3"] = Color3.fromRGB(69, 3, 113);
+G2L["a"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["a"]["Size"] = UDim2.new(0, 205, 0, 38);
+G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Text"] = [[Execute]];
+G2L["a"]["Name"] = [[Exe]];
+G2L["a"]["Position"] = UDim2.new(0.2181, 0, -0.0122, 0);
 
 
 -- StarterGui.ScreenGui.Main.Buttons.Clear
-G2L["8"] = Instance.new("TextButton", G2L["5"]);
-G2L["8"]["BorderSizePixel"] = 0;
-G2L["8"]["TextSize"] = 29;
-G2L["8"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["8"]["BackgroundColor3"] = Color3.fromRGB(69, 3, 113);
-G2L["8"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["8"]["Size"] = UDim2.new(0, 205, 0, 38);
-G2L["8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["8"]["Text"] = [[clear]];
-G2L["8"]["Name"] = [[Clear]];
-G2L["8"]["Position"] = UDim2.new(0.2181, 0, -0.0122, 0);
+G2L["b"] = Instance.new("TextButton", G2L["8"]);
+G2L["b"]["BorderSizePixel"] = 0;
+G2L["b"]["TextSize"] = 29;
+G2L["b"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["b"]["BackgroundColor3"] = Color3.fromRGB(69, 3, 113);
+G2L["b"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["b"]["Size"] = UDim2.new(0, 205, 0, 38);
+G2L["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["b"]["Text"] = [[clear]];
+G2L["b"]["Name"] = [[Clear]];
+G2L["b"]["Position"] = UDim2.new(0.2181, 0, -0.0122, 0);
 
 
 -- StarterGui.ScreenGui.Main.Name
-G2L["9"] = Instance.new("TextLabel", G2L["2"]);
-G2L["9"]["BorderSizePixel"] = 0;
-G2L["9"]["TextSize"] = 36;
-G2L["9"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["9"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["9"]["BackgroundTransparency"] = 1;
-G2L["9"]["Size"] = UDim2.new(0, 200, 0, 50);
-G2L["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["9"]["Text"] = [[Moon Backdoor]];
-G2L["9"]["Name"] = [[Name]];
-G2L["9"]["Position"] = UDim2.new(0.13347, 0, 0, 0);
-
-
--- StarterGui.ScreenGui.Main.Logo
-G2L["a"] = Instance.new("ImageLabel", G2L["2"]);
-G2L["a"]["BorderSizePixel"] = 0;
-G2L["a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
--- [ERROR] cannot convert ImageContent, please report to "https://github.com/uniquadev/GuiToLuaConverter/issues"
-G2L["a"]["Image"] = [[rbxassetid://73958241564252]];
-G2L["a"]["Size"] = UDim2.new(0, 33, 0, 38);
-G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a"]["BackgroundTransparency"] = 1;
-G2L["a"]["Name"] = [[Logo]];
-G2L["a"]["Position"] = UDim2.new(0.04237, 0, 0.02564, 0);
-
-
--- StarterGui.ScreenGui.Main.Logo.UIAspectRatioConstraint
-G2L["b"] = Instance.new("UIAspectRatioConstraint", G2L["a"]);
-
-
-
--- StarterGui.ScreenGui.Main.Stats
 G2L["c"] = Instance.new("TextLabel", G2L["2"]);
 G2L["c"]["BorderSizePixel"] = 0;
-G2L["c"]["TextSize"] = 20;
+G2L["c"]["TextSize"] = 36;
+G2L["c"]["TextXAlignment"] = Enum.TextXAlignment.Left;
 G2L["c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["c"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["c"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["c"]["BackgroundTransparency"] = 1;
 G2L["c"]["Size"] = UDim2.new(0, 200, 0, 50);
 G2L["c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["c"]["Text"] = [[🔴]];
-G2L["c"]["Name"] = [[Stats]];
-G2L["c"]["Position"] = UDim2.new(0.89407, 0, 0, 0);
+G2L["c"]["Text"] = [[Moon Backdoor]];
+G2L["c"]["Name"] = [[Name]];
+G2L["c"]["Position"] = UDim2.new(0.13347, 0, 0, 0);
 
 
--- StarterGui.ScreenGui.Main.Stats.UIAspectRatioConstraint
-G2L["d"] = Instance.new("UIAspectRatioConstraint", G2L["c"]);
+-- StarterGui.ScreenGui.Main.Logo
+G2L["d"] = Instance.new("ImageLabel", G2L["2"]);
+G2L["d"]["BorderSizePixel"] = 0;
+G2L["d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+-- [ERROR] cannot convert ImageContent, please report to "https://github.com/uniquadev/GuiToLuaConverter/issues"
+G2L["d"]["Image"] = [[rbxassetid://73958241564252]];
+G2L["d"]["Size"] = UDim2.new(0, 33, 0, 38);
+G2L["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["d"]["BackgroundTransparency"] = 1;
+G2L["d"]["Name"] = [[Logo]];
+G2L["d"]["Position"] = UDim2.new(0.04237, 0, 0.02564, 0);
+
+
+-- StarterGui.ScreenGui.Main.Logo.UIAspectRatioConstraint
+G2L["e"] = Instance.new("UIAspectRatioConstraint", G2L["d"]);
 
 
 
--- StarterGui.ScreenGui.Main.Connect
-G2L["e"] = Instance.new("TextButton", G2L["2"]);
-G2L["e"]["BorderSizePixel"] = 0;
-G2L["e"]["TextSize"] = 20;
-G2L["e"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["e"]["BackgroundColor3"] = Color3.fromRGB(69, 3, 113);
-G2L["e"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["e"]["Size"] = UDim2.new(0, 98, 0.01, 22);
-G2L["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["e"]["Text"] = [[Connect]];
-G2L["e"]["Name"] = [[Connect]];
-G2L["e"]["Position"] = UDim2.new(0.68522, 0, 0.0387, 0);
-
-
--- StarterGui.ScreenGui.Main.Contains
+-- StarterGui.ScreenGui.Main.Stats
 G2L["f"] = Instance.new("TextLabel", G2L["2"]);
 G2L["f"]["BorderSizePixel"] = 0;
-G2L["f"]["TextSize"] = 36;
-G2L["f"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["f"]["TextSize"] = 20;
 G2L["f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["f"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["f"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["f"]["BackgroundTransparency"] = 1;
 G2L["f"]["Size"] = UDim2.new(0, 200, 0, 50);
-G2L["f"]["Visible"] = false;
 G2L["f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["f"]["Text"] = [[Moon Backdoor]];
-G2L["f"]["Name"] = [[Contains]];
-G2L["f"]["Position"] = UDim2.new(0.13347, 0, 0, 0);
+G2L["f"]["Text"] = [[🔴]];
+G2L["f"]["Name"] = [[Stats]];
+G2L["f"]["Position"] = UDim2.new(0.89407, 0, 0, 0);
+
+
+-- StarterGui.ScreenGui.Main.Stats.UIAspectRatioConstraint
+G2L["10"] = Instance.new("UIAspectRatioConstraint", G2L["f"]);
+
+
+
+-- StarterGui.ScreenGui.Main.Connect
+G2L["11"] = Instance.new("TextButton", G2L["2"]);
+G2L["11"]["BorderSizePixel"] = 0;
+G2L["11"]["TextSize"] = 20;
+G2L["11"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["11"]["BackgroundColor3"] = Color3.fromRGB(69, 3, 113);
+G2L["11"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["11"]["Size"] = UDim2.new(0, 98, 0.01, 22);
+G2L["11"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["11"]["Text"] = [[Connect]];
+G2L["11"]["Name"] = [[Connect]];
+G2L["11"]["Position"] = UDim2.new(0.68522, 0, 0.0387, 0);
+
+
+-- StarterGui.ScreenGui.Main.Contains
+G2L["12"] = Instance.new("TextLabel", G2L["2"]);
+G2L["12"]["BorderSizePixel"] = 0;
+G2L["12"]["TextSize"] = 36;
+G2L["12"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["12"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["12"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["12"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["12"]["BackgroundTransparency"] = 1;
+G2L["12"]["Size"] = UDim2.new(0, 200, 0, 50);
+G2L["12"]["Visible"] = false;
+G2L["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["12"]["Text"] = [[Moon Backdoor]];
+G2L["12"]["Name"] = [[Contains]];
+G2L["12"]["Position"] = UDim2.new(0.13347, 0, 0, 0);
 
 
 -- StarterGui.ScreenGui.Main.LocalScript
-G2L["10"] = Instance.new("LocalScript", G2L["2"]);
-
-
-
--- StarterGui.ScreenGui.Main.UIDrag
-G2L["11"] = Instance.new("LocalScript", G2L["2"]);
-G2L["11"]["Name"] = [[UIDrag]];
-
-
--- StarterGui.ScreenGui.Main.LocalScript
-G2L["12"] = Instance.new("LocalScript", G2L["2"]);
-
-
-
--- StarterGui.ScreenGui.Main.LocalScript
-local function C_10()
-local script = G2L["10"];
+local function C_3()
+local script = G2L["3"];
 	local buttons = {
 		Exe = script.Parent.Buttons.Exe;
 		clear = script.Parent.Buttons.Clear;
@@ -496,10 +496,10 @@ local script = G2L["10"];
 	status("O")
 	updateExeButton()
 end;
-task.spawn(C_10);
+task.spawn(C_3);
 -- StarterGui.ScreenGui.Main.UIDrag
-local function C_11()
-local script = G2L["11"];
+local function C_4()
+local script = G2L["4"];
 	-- Made by Real_IceyDev (@lceyDex) --
 	-- Simple UI dragger (PC Only/Any device that has a mouse) --
 	
@@ -538,16 +538,16 @@ local script = G2L["11"];
 		end
 	end)
 end;
-task.spawn(C_11);
+task.spawn(C_4);
 -- StarterGui.ScreenGui.Main.LocalScript
-local function C_12()
-local script = G2L["12"];
+local function C_5()
+local script = G2L["5"];
 	local msg = Instance.new("Message", game.Workspace)
 	msg.Text = "pls join Moon Backdoor Dc!!"
 	setclipboard("https://discord.gg/W5bNxXf85r")
 	wait(5)
 	msg:Destroy()
 end;
-task.spawn(C_12);
+task.spawn(C_5);
 
 return G2L["1"], require;
