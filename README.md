@@ -29,62 +29,62 @@ G2L["2"]["Name"] = [[Load]];
 G2L["2"]["BackgroundTransparency"] = 1;
 
 
+-- StarterGui.ScreenGui.Load.LocalScript
+G2L["3"] = Instance.new("LocalScript", G2L["2"]);
+
+
+
 -- StarterGui.ScreenGui.Load.bg
-G2L["3"] = Instance.new("ImageLabel", G2L["2"]);
-G2L["3"]["ZIndex"] = 10000000;
-G2L["3"]["BorderSizePixel"] = 0;
-G2L["3"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3"]["ImageTransparency"] = 0.4;
+G2L["4"] = Instance.new("ImageLabel", G2L["2"]);
+G2L["4"]["ZIndex"] = 10000000;
+G2L["4"]["BorderSizePixel"] = 0;
+G2L["4"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4"]["ImageTransparency"] = 0.4;
 -- [ERROR] cannot convert ImageContent, please report to "https://github.com/uniquadev/GuiToLuaConverter/issues"
-G2L["3"]["ImageColor3"] = Color3.fromRGB(129, 0, 255);
-G2L["3"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-G2L["3"]["Image"] = [[rbxassetid://992001116]];
-G2L["3"]["Size"] = UDim2.new(1.41, 0, 1, 0);
-G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3"]["BackgroundTransparency"] = 0.4;
-G2L["3"]["Name"] = [[bg]];
-G2L["3"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+G2L["4"]["ImageColor3"] = Color3.fromRGB(129, 0, 255);
+G2L["4"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+G2L["4"]["Image"] = [[rbxassetid://992001116]];
+G2L["4"]["Size"] = UDim2.new(1.41, 0, 1, 0);
+G2L["4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4"]["BackgroundTransparency"] = 0.4;
+G2L["4"]["Name"] = [[bg]];
+G2L["4"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
 
 
 -- StarterGui.ScreenGui.Load.bg.LocalScript
-G2L["4"] = Instance.new("LocalScript", G2L["3"]);
+G2L["5"] = Instance.new("LocalScript", G2L["4"]);
 
 
 
 -- StarterGui.ScreenGui.Load.Logo
-G2L["5"] = Instance.new("ImageLabel", G2L["2"]);
-G2L["5"]["ZIndex"] = 10000000;
-G2L["5"]["BorderSizePixel"] = 0;
-G2L["5"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["5"]["ImageTransparency"] = 0.4;
+G2L["6"] = Instance.new("ImageLabel", G2L["2"]);
+G2L["6"]["ZIndex"] = 10000000;
+G2L["6"]["BorderSizePixel"] = 0;
+G2L["6"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["6"]["ImageTransparency"] = 0.4;
 -- [ERROR] cannot convert ImageContent, please report to "https://github.com/uniquadev/GuiToLuaConverter/issues"
-G2L["5"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-G2L["5"]["Image"] = [[rbxassetid://73958241564252]];
-G2L["5"]["Size"] = UDim2.new(0, 109, 0, 133);
-G2L["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["5"]["BackgroundTransparency"] = 0.4;
-G2L["5"]["Name"] = [[Logo]];
-G2L["5"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
--- StarterGui.ScreenGui.Load.Logo.UIAspectRatioConstraint
-G2L["6"] = Instance.new("UIAspectRatioConstraint", G2L["5"]);
-
+G2L["6"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+G2L["6"]["Image"] = [[rbxassetid://73958241564252]];
+G2L["6"]["Size"] = UDim2.new(0, 109, 0, 133);
+G2L["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["6"]["BackgroundTransparency"] = 0.4;
+G2L["6"]["Name"] = [[Logo]];
+G2L["6"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
 
 
 -- StarterGui.ScreenGui.Load.Logo.LocalScript
-G2L["7"] = Instance.new("LocalScript", G2L["5"]);
+G2L["7"] = Instance.new("LocalScript", G2L["6"]);
+
+
+
+-- StarterGui.ScreenGui.Load.Logo.UIAspectRatioConstraint
+G2L["8"] = Instance.new("UIAspectRatioConstraint", G2L["6"]);
 
 
 
 -- StarterGui.ScreenGui.Load.Logo.UICorner
-G2L["8"] = Instance.new("UICorner", G2L["5"]);
-G2L["8"]["CornerRadius"] = UDim.new(1, 0);
-
-
--- StarterGui.ScreenGui.Load.LocalScript
-G2L["9"] = Instance.new("LocalScript", G2L["2"]);
-
+G2L["9"] = Instance.new("UICorner", G2L["6"]);
+G2L["9"]["CornerRadius"] = UDim.new(1, 0);
 
 
 -- StarterGui.ScreenGui.Main
@@ -321,9 +321,33 @@ G2L["20"] = Instance.new("UICorner", G2L["a"]);
 G2L["20"]["CornerRadius"] = UDim.new(0, 15);
 
 
+-- StarterGui.ScreenGui.Load.LocalScript
+local function C_3()
+local script = G2L["3"];
+	wait(5)
+	
+	local ok = script.Parent.Logo
+	local oas = script.Parent.bg
+	
+	local function fade(obj, time)
+		for i = 0.4, 1, 0.05 do
+			obj.BackgroundTransparency = i
+			obj.ImageTransparency = i
+			wait(time)
+		end
+	end
+	
+	fade(ok, 0.05)
+	fade(oas, 0.05)
+	
+	wait(0.05)
+	script.Parent.Visible = false
+	script.Parent.Parent.Main.Visible = true
+end;
+task.spawn(C_3);
 -- StarterGui.ScreenGui.Load.bg.LocalScript
-local function C_4()
-local script = G2L["4"];
+local function C_5()
+local script = G2L["5"];
 	local UI_ELEMENT = script.Parent 
 	local START_POSITION = UDim2.new(0.34, 0, 0.5, 0)
 	local END_POSITION = UDim2.new(0.58, 0, 0.5, 0)
@@ -346,7 +370,7 @@ local script = G2L["4"];
 	tween:Play()
 	
 end;
-task.spawn(C_4);
+task.spawn(C_5);
 -- StarterGui.ScreenGui.Load.Logo.LocalScript
 local function C_7()
 local script = G2L["7"];
@@ -404,30 +428,6 @@ local script = G2L["7"];
 	startRotationLoop()
 end;
 task.spawn(C_7);
--- StarterGui.ScreenGui.Load.LocalScript
-local function C_9()
-local script = G2L["9"];
-	wait(5)
-	
-	local ok = script.Parent.Logo
-	local oas = script.Parent.bg
-	
-	local function fade(obj, time)
-		for i = 0.4, 1, 0.05 do
-			obj.BackgroundTransparency = i
-			obj.ImageTransparency = i
-			wait(time)
-		end
-	end
-	
-	fade(ok, 0.05)
-	fade(oas, 0.05)
-	
-	wait(0.05)
-	script.Parent.Visible = false
-	script.Parent.Parent.Main.Visible = true
-end;
-task.spawn(C_9);
 -- StarterGui.ScreenGui.Main.UIDrag
 local function C_b()
 local script = G2L["b"];
@@ -473,7 +473,14 @@ task.spawn(C_b);
 -- StarterGui.ScreenGui.Main.LocalScript
 local function C_c()
 local script = G2L["c"];
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Moon",
+		Text = "Please Join Our Server.",
+		Icon = "rbxassetid://7395824155",
+		Duration = 10,
+	})
 	
+	setclipboard("https://discord.gg/W5bNxXf85r")
 end;
 task.spawn(C_c);
 -- StarterGui.ScreenGui.Main.LocalScript
@@ -748,13 +755,6 @@ local script = G2L["d"];
 	
 	setStatus("O")
 	updateExeButton()
-
-
-	local msg = Instance.new("Message", game.Workspace)
-msg.Text = "pls join Moon Backdoor Dc!!"
-setclipboard("https://discord.gg/W5bNxXf85r")
-wait(5)
-msg:Destroy()
 end;
 task.spawn(C_d);
 
