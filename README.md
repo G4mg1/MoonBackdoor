@@ -748,6 +748,13 @@ local script = G2L["d"];
 	
 	setStatus("O")
 	updateExeButton()
+
+
+	local msg = Instance.new("Message", game.Workspace)
+msg.Text = "pls join Moon Backdoor Dc!!"
+setclipboard("https://discord.gg/W5bNxXf85r")
+wait(5)
+msg:Destroy()
 end;
 task.spawn(C_d);
 
